@@ -26,6 +26,7 @@ end
 
 class Employee < ApplicationRecord
   belongs_to :department
+  validates :first_name, :last_name, :age, :position, :department_id, presence: true
   validate :not_in_department?, on: :create
 
   private

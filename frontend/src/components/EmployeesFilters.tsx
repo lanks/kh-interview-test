@@ -12,19 +12,17 @@ interface EmployeesFiltersProps {
 const EmployeesFilters: React.FC<EmployeesFiltersProps> = ({departments, filters, setFilters}) => {
   const [searchValue, setSearchValue] = useState("");
 
+  // Only submit the search on pressing enter
+  // We could make it on all inputs but then need debouncing
   const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       setFilters({...filters, name: searchValue})
     }
   };
   
-  // I have only added this as I have added the input as "search" which includes a "x" icon that clears the input.
+  // Added this as I have added the input as "search" which includes a "x" icon that clears the input.
   useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      if(!searchValue) setFilters({...filters, name: searchValue});
-    }, 300);
-
-    return () => clearTimeout(debounceTimer);
+    if(!searchValue) setFilters({...filters, name: searchValue});
   }, [searchValue]);
 
   

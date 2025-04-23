@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form"
 import { CollectionProxy } from 'spraypaint/lib-esm/proxies';
 import Department from '../resources/Department';
 
-
 interface NewEmployeeModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
   departments?: CollectionProxy<Department>
 }
 const NewEmployeeModal: React.FC<NewEmployeeModalProps> = ({ departments, open, setOpen }: NewEmployeeModalProps) => {
+  // React form provides a nice interface to work with forms with hooks.
   const {
     register,
     handleSubmit,
@@ -20,23 +20,24 @@ const NewEmployeeModal: React.FC<NewEmployeeModalProps> = ({ departments, open, 
   } = useForm<Employee>({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    defaultValues: new Employee()
+    defaultValues: new Employee({})
   });
 
   const onFormSuccess = async (data: Employee) => {
-    // Scrub data for actual mutation
-    //@TODO The actual update
+    // Calling the save method
     const success = await data.save();
     if(success) { 
       reset(new Employee());
       setOpen(false)
     } else {
-      
+      //@TODO Display an error message in case there are any errors
     }
   }
 
   const onFormError = async () => {
   }
+  
+  //Validation method to check if the person already exists in the department or not.
   const isPersonInDepartment = async (departmentId: number): Promise<boolean> => {
     const firstName = getValues('firstName');
     const lastName = getValues('lastName');

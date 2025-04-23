@@ -5,7 +5,6 @@ import { flexRender, createColumnHelper, getCoreRowModel, PaginationState,
          Header,
          OnChangeFn} from '@tanstack/react-table';
 import Employee from '../resources/Employee';
-import { Filters } from '../utils/types';
 
 interface EmployeesTableProps {
   pagination: PaginationState;
@@ -31,7 +30,6 @@ const EmployeesTable: React.FC<EmployeesTableProps> = ({
   // Helper methoods from Tanstack
   const columnHelper = createColumnHelper<Employee>();
   
-
   const columns = useMemo(() => [
     columnHelper.accessor('firstName', {
       cell: (info) => info.getValue(),
@@ -141,7 +139,7 @@ const EmployeesTable: React.FC<EmployeesTableProps> = ({
     )
   }
 
-  // Simple paginatioin with arrows
+  // Simple pagination with arrows
   const paginator = () => {
     return (
       <><div className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6">

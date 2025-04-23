@@ -6,7 +6,7 @@ import { Filters } from "../utils/types";
 import { useEmployees } from "../hooks/useEmployees";
 import NewEmployeeModal from "./NewEmployeeModal";
 import { useDepartments } from "../hooks/useDepartments";
-const Employees: React.FC = () => {
+const EmployeesPage: React.FC = () => {
   const [newEmployeeOpen, setNewEmployeeOpen] = useState(false);
   // State variables for the table / filters management.
   const [pagination, setPagination] = useState<PaginationState>({
@@ -48,4 +48,4 @@ const Employees: React.FC = () => {
     </>
   );
 };
-export default Employees;
+export default EmployeesPage;
