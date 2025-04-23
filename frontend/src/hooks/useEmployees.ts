@@ -24,8 +24,6 @@ export const useEmployees = (pageSize: number, page: number, sorting: SortingSta
         if (filters.departmentId) {
           query = query.where({ departmentId: filters.departmentId });
         }
-        // NOTE: when using .includes("department") it never reaches the return and re-runs this query infinitely.
-        // @TODO Will need to figure out the correct use of includes to avoid the N+1 query.
         const response = await query.includes("department").stats({ total: "count" }).order(mappedSort).per(pageSize).page(page).all();
         return response;
       }
