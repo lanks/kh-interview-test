@@ -153,7 +153,7 @@ const EmployeesTable: React.FC<EmployeesTableProps> = ({
         <div>
           <p className="text-sm text-gray-700">
             Showing{' '}
-            <span className="font-medium">{pagination.pageIndex == 1 ? pagination.pageIndex : (pagination.pageIndex * pagination.pageSize) - pagination.pageSize}</span>{' '}
+            <span className="font-medium">{pagination.pageIndex == 1 ? pagination.pageIndex : ((pagination.pageIndex * pagination.pageSize) - pagination.pageSize) + 1 }</span>{' '}
             to{' '}
             <span className="font-medium">{pagination.pageIndex == 1 ? pagination.pageSize : (pagination.pageIndex * pagination.pageSize)}</span>{' '}
             of{' '}
