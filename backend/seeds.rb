@@ -26,6 +26,17 @@ end
 
 class Employee < ApplicationRecord
   belongs_to :department
+  validate :not_in_department?, on: :create
+
+  private
+  def not_in_department?
+    # Check if an employee with same name exists in the department
+    existing = Employee.where(
+      first_name: self.first_name,
+      last_name: self.last_name,
+      department_id: self.department_id
+    ).none?
+  end
 end
 
 class Department < ApplicationRecord
